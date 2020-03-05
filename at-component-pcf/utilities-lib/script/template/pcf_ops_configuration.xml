@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message-bundle>
+
+	<restMessage id="PCF_HELM_JSON" appInterface="REST"
+		type="JSON">
+        { 
+           "helm": 
+           {
+               "default-repository": "pcrf",
+               "repository": 
+               {
+                  "name": "pcrf",
+                  "url": "PCF_HELM_REP_URL"
+               }
+           }
+        }
+	</restMessage>
+	
+	<restMessage id="CNEE_HELM_JSON" appInterface="REST"
+		type="JSON">
+        { 
+           "helm": 
+           {
+               "default-repository": "cnee",
+               "repository": 
+               {
+                  "name": "cnee",
+                  "url": "CNEE_HELM_REP_URL"
+               }
+           }
+        }
+	</restMessage>
+	
+	<restMessage id="k8s_Config_JSON" appInterface="REST"
+		type="JSON">
+		{ "kubernetes": { 
+			"namespace": "cnee",
+			"registry": "REGISTRY_VALUE",
+			"single-node": "false",
+			"use-volume-claims": "false",
+			"image-pull-secrets": "regcred",
+			"ingress-host-name": "MASTER_IP.nip.io"
+			} 			 
+		}
+	</restMessage>
+	
+	<restMessage id="License_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"license": {
+				"feature-name": "MOBILE-CORE",
+				"encrypted-key": "25D220C6817CD63603D72ED51C811F9B14BD9210E6461AAEB21AE40EC3C2EC3135915F4E35AAAF9F6853D9AD94F792AC404068FE0EF7420B06FADA05897CFAF74BEEC36E4748B312031880091CF85365"
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="pcf_engine_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"pcrf": {
+				"group": "engines",
+				"replicas": ENGINE_REPLICAS,
+				"repository": "policy"
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_REPLICAS_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"global-settings": {
+					"db-replica": SESSION_REPLICAS_CNT
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SPR_SHARDS_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"spr": {
+					"shard-count": SPR_SHARDS_CNT
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_SHARDS_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"shard-count": SESSION_SHARDS_CNT
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_DATASTORES_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"session-db-ep-replicas": DATASTORE_REPLICAS
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="LOGGING_RedisConnection" appInterface="REST"
+		type="JSON">
+		{ 
+		    "logging" : 
+		      {
+		        "logger" :
+		        {
+			         "name": "com.broadhop.utilities.queue.redis.local.RedisConnection",
+			         "level": "error"
+		        }
+		    }
+		}		
+	</restMessage>
+	
+	<restMessage id="LOGGING_RedisMessageCluster" appInterface="REST"
+		type="JSON">
+		{ 
+		    "logging" : 
+		      {
+		        "logger" :
+		        {
+			         "name": "com.broadhop.utilities.queue.redis.local.RedisMessageCluster",
+			         "level": "error"
+		        }
+		    }
+		}		
+	</restMessage>
+	
+	<restMessage id="LOGGING_ChargingRule" appInterface="REST"
+		type="JSON">
+		{ 
+		    "logging" : 
+		      {
+		        "logger" :
+		        {
+			         "name": "com.broadhop.diameter2.policy.features.charging.ChargingRule",
+			         "level": "error"
+		        }
+		    }
+		}		
+	</restMessage>
+	
+	<restMessage id="LOGGING_MongoDatabaseUtil" appInterface="REST"
+		type="JSON">
+		{ 
+		    "logging" : 
+		      {
+		        "logger" :
+		        {
+			         "name": "com.broadhop.spr.dao.impl.mongo.MongoDatabaseUtil",
+			         "level": "error"
+		        }
+		    }
+		}		
+	</restMessage>
+	
+	<restMessage id="LOGGING_TransactionManager" appInterface="REST"
+		type="JSON">
+		{ 
+		    "logging" : 
+		      {
+		        "logger" :
+		        {
+			         "name": "com.broadhop.transaction.TransactionManager",
+			         "level": "error"
+		        }
+		    }
+		}		
+	</restMessage>
+	
+	<restMessage id="LOGGING_consequence" appInterface="REST"
+		type="JSON">
+		{ 
+		    "logging" : 
+		      {
+		        "logger" :
+		        {
+			         "name": "com.broadhop.policy.impl.RulesPolicyService.consequence",
+			         "level": "warn"
+		        }
+		    }
+		}		
+	</restMessage>
+	
+	<restMessage id="LOGGING_engine" appInterface="REST"
+		type="JSON">
+		{ 
+		    "logging" : 
+		      {
+		        "logger" :
+		        {
+			         "name": "policy.engine",
+			         "level": "warn"
+		        }
+		    }
+		}		
+	</restMessage>
+	
+	
+	<restMessage id="DEPLOY_SETUP" appInterface="REST"
+		type="JSON">
+		{
+			"system": 
+			{
+				"mode": "running"
+			}
+		}		
+	</restMessage>
+	
+	<restMessage id="UNDEPLOY_SETUP" appInterface="REST"
+		type="JSON">
+		{
+			"system": 
+			{
+				"mode": "shutdown"
+			}
+		}		
+	</restMessage>
+	
+	<restMessage id="MAINTENANCE_SETUP" appInterface="REST"
+		type="JSON">
+		{
+			"system": 
+			{
+				"mode": "maintenance"
+			}
+		}		
+	</restMessage>
+	
+	<restMessage id="DIAM_STACKS_GX_JSON" appInterface="REST"
+		type="JSON">
+        {
+            "diameter": 
+            {
+                "group": 
+                {
+                    "name": "pune-gx",
+                    "mode": "server",
+                    "repository": "pcf",
+                    "stack":
+                    {
+                        "name": "pune-gx",
+                        "application": "gx",
+                        "bind-ip": "GX_STACK1_IP",
+                        "bind-port": "GX_STACK1_PORT",
+                        "fqdn": "GX_STACK1_FQDN",
+                        "realm": "GX_STACK1_REALM"
+                    }
+                }
+            } 
+        }
+	</restMessage>
+
+	<restMessage id="DIAM_STACKS_RX_JSON" appInterface="REST"
+		type="JSON">
+        {
+            "diameter": 
+            {
+                "group": 
+                {
+                    "name": "pune-rx",
+                    "mode": "server",
+                    "repository": "pcf",
+                    "stack":
+                    {
+                        "name": "pune-rx",
+                        "application": "rx",
+                        "bind-ip": "RX_STACK1_IP",
+                        "bind-port": "RX_STACK1_PORT",
+                        "fqdn": "RX_STACK1_FQDN",
+                        "realm": "RX_STACK1_REALM"
+                    }
+                }
+            } 
+        }
+	</restMessage>
+	
+	<restMessage id="DIAM_APPS_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"diameter": {
+		  		 "application": [
+		      		{
+		         		"name": "gx",
+		         		"application-id": "16777238",
+		         		"tgpp-application": "true",
+		         		"vendor": "10415"
+		      		},
+		      		{
+		         		"name": "rx",
+		         		"application-id": "16777236",
+		         		"tgpp-application": "true",
+		         		"vendor": "10415"
+		      		},
+		      		{
+		         		"name": "sd",
+		         		"application-id": "16777303",
+		         		"tgpp-application": "true",
+		         		"vendor": "10415"
+		      		},
+		      		{
+		         		"name": "sh",
+		         		"application-id": "16777217",
+		         		"tgpp-application": "true",
+		         		"vendor": "10415"
+		      		}
+		   		]
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SUBVERSION_ENABLE" appInterface="REST"
+		type="JSON">
+		{
+			"testing": 
+			{
+				"subversion-ingress-enabled": "true"
+			}
+		}		
+	</restMessage>
+	
+	<restMessage id="SUBVERSION_DISABLE" appInterface="REST"
+		type="JSON">
+		{
+			"testing": 
+			{
+				"subversion-ingress-enabled": "false"
+			}
+		}		
+	</restMessage>
+	
+</message-bundle>

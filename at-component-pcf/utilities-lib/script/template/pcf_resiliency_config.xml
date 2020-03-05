@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message-bundle>
+
+	
+    <restMessage id="pcf_engine_scale_up_JSON" appInterface="REST"
+		type="JSON">
+		{
+   			"engine": {
+     	    	"group": "magenta",
+      			"replicas": "ENGINE_REPLICAS_UP"
+   			}
+		}
+	</restMessage>
+	
+    <restMessage id="pcf_engine_scale_down_JSON" appInterface="REST"
+		type="JSON">
+		{
+   			"engine": {
+     	    	"group": "magenta",
+      			"replicas": "ENGINE_REPLICAS_DOWN"
+   			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_REPLICAS_UP_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"global-settings": {
+					"db-replica": SESSION_REPLICAS_CNT_UP
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_REPLICAS_DOWN_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"global-settings": {
+					"db-replica": SESSION_REPLICAS_CNT_DOWN
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_SHARDS_UP_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"shard-count": SESSION_SHARDS_CNT_UP
+				}
+			}
+		}
+	</restMessage>	
+	
+	<restMessage id="SESSION_SHARDS_DOWN_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"shard-count": SESSION_SHARDS_CNT_DOWN
+				}
+			}
+		}
+	</restMessage>	
+	
+	<restMessage id="BALANCE_SHARDS_UP_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"shard-count": BALANCE_SHARDS_CNT_UP
+		}
+	</restMessage>	
+	
+	<restMessage id="BALANCE_SHARDS_DOWN_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"shard-count": BALANCE_SHARDS_CNT_DOWN
+		}
+	</restMessage>	
+	
+	<restMessage id="SESSION_DB_ENDPOINT_UP_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"session-db-ep-replicas": SESSION_DB_ENDPOINT_CNT_UP
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_DB_ENDPOINT_DOWN_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"session-db-ep-replicas": SESSION_DB_ENDPOINT_CNT_DOWN
+		}
+	</restMessage>
+	
+	<restMessage id="REST_ENDPOINT_UP_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"replicas": REST_ENDPOINT_CNT_UP
+		}
+	</restMessage>
+	
+	<restMessage id="REST_ENDPOINT_DOWN_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"replicas": REST_ENDPOINT_CNT_DOWN
+		}
+	</restMessage>
+	
+	<restMessage id="BULK_STATS_ENABLE_JSON" appInterface="REST"
+		type="JSON">
+		{ "bulk-stats":
+		 	{ 
+				"enable" : BULK_STATS_ENABLE_VAL  
+			} 
+		}		
+	</restMessage>
+	
+	<restMessage id="BULK_STATS_DISABLE_JSON" appInterface="REST"
+		type="JSON">
+		{ "bulk-stats":
+			{ 
+				"enable" : BULK_STATS_DISABLE_VAL  
+			} 
+		}		
+	</restMessage>
+	
+</message-bundle>

@@ -1,0 +1,266 @@
+product pcf# show running-config
+ldap replicas 2
+ldap server-set USD
+ search-user dn cn=sdcUser,dc=C-NTDB
+ search-user password siemens
+ health-check interval-ms 5000
+ initial-connections                            10
+ max-connections                                10
+ retry-count                                    2
+ retry-timer-ms                                 100
+ max-failover-connection-age-ms                 60000
+ binds-per-second                               0.2
+ number-consecutive-timeouts-for-bad-connection -1
+ connection 192.168.205.38 389
+  priority        400
+  connection-rule ROUND_ROBIN
+  auto-reconnect  true
+  timeout-ms      200
+  bind-timeout-ms 3000
+ exit
+ connection 192.168.205.38 390
+  priority        400
+  connection-rule ROUND_ROBIN
+  auto-reconnect  true
+  timeout-ms      200
+  bind-timeout-ms 3000
+ exit
+ connection 192.168.205.38 391
+  priority        400
+  connection-rule ROUND_ROBIN
+  auto-reconnect  true
+  timeout-ms      200
+  bind-timeout-ms 3000
+ exit
+exit
+db global-settings db-replica 1
+db spr shard-count 1
+db balance shard-count 1
+db session session-db-ep-replicas 2
+db session timer-limit-tps 100
+db session shard-count 2
+policy:license DIAMETER-GX
+ encrypted-key 70984A9782981EAFF941B161B505B90B14BD9210E6461AAEB21AE40EC3C2EC3135915F4E35AAAF9F6853D9AD94F792AC404068FE0EF7420B06FADA05897CFAF74BEEC36E4748B312031880091CF85365
+exit
+policy:license DIAMETER-RX
+ encrypted-key 3142786DDD9172847B584AF6C82DA48214BD9210E6461AAEB21AE40EC3C2EC3135915F4E35AAAF9F6853D9AD94F792AC404068FE0EF7420B06FADA05897CFAF74BEEC36E4748B312031880091CF85365
+exit
+policy:license DIAMETER-SH
+ encrypted-key FFB2FAFB5E43C1D99573DF511620557414BD9210E6461AAEB21AE40EC3C2EC3135915F4E35AAAF9F6853D9AD94F792AC0296B68BF946453DDCF4F47D9C0AEE464BEEC36E4748B312031880091CF85365
+exit
+policy:license DIAMETER-SY
+ encrypted-key 3CCFC29E6106D06C9551A592C907DFFD14BD9210E6461AAEB21AE40EC3C2EC3135915F4E35AAAF9F6853D9AD94F792AC404068FE0EF7420B06FADA05897CFAF74BEEC36E4748B312031880091CF85365
+exit
+policy:license MOBILE-CORE
+ encrypted-key 25D220C6817CD63603D72ED51C811F9B14BD9210E6461AAEB21AE40EC3C2EC3135915F4E35AAAF9F6853D9AD94F792AC404068FE0EF7420B06FADA05897CFAF74BEEC36E4748B312031880091CF85365
+exit
+debug logging default-level error
+debug logging logger com.broadhop
+ level error
+exit
+debug logging logger com.broadhop.diameter2.policy
+ level error
+exit
+debug logging logger com.broadhop.ldap
+ level error
+exit
+debug logging logger com.broadhop.microservices.control.StatisticsRetriever
+ level error
+exit
+debug logging logger com.broadhop.unifiedapi
+ level error
+exit
+debug logging logger com.broadhop.utilities.queue.redis.local.RedisMessageCluster
+ level error
+exit
+debug logging logger com.cisco
+ level error
+exit
+debug logging logger com.cisco.cps.generic
+ level error
+exit
+debug logging logger com.cisco.pcf
+ level error
+exit
+debug logging logger com.cisco.pcf.api.client.NpcfPolicyControlApiClient
+ level error
+exit
+debug logging logger com.cisco.pcf.endpoint
+ level error
+exit
+debug logging logger com.cisco.pcf.endpoint.event.MessageDealer
+ level error
+exit
+debug logging logger io
+ level error
+exit
+debug logging logger org
+ level error
+exit
+debug logging logger org.mongodb
+ level error
+exit
+debug logging logger policy.engine
+ level error
+exit
+testing subversion-ingress-enabled false
+diameter application rx
+ application-id   16777236
+ tgpp-application true
+ vendor           [ 10415 ]
+exit
+diameter group rx
+ mode server
+ stack rx
+  application rx
+  bind-ip     192.168.205.30
+  bind-port   3868
+  fqdn        pcf-rx-server-1
+  realm       pcf.rx.server.cisco.com
+ exit
+exit
+rest-endpoint ips    [ 192.168.205.30 ]
+rest-endpoint port   9082
+rest-endpoint tracing-service-name pcf-rest-endpoint
+rest-endpoint replicas 2
+api unified engine-group magenta
+engine magenta
+ replicas              2
+ unified-api-replicas  1
+ subversion-run-url http://svn/repos/run
+ subversion-config-url http://svn/repos/configuration
+ tracing-service-name  pcf-engine
+ properties com.cisco.engine.log.type
+  value 2
+ exit
+ properties disableCommandClient
+  value true
+ exit
+exit
+label protocol-layer key smi.cisco.com/node-type
+label protocol-layer value protocol
+label service-layer key smi.cisco.com/node-type
+label service-layer value service
+label cdl-layer key smi.cisco.com/node-type
+label cdl-layer value cdl
+label oam-layer key smi.cisco.com/node-type
+label oam-layer value oam
+service-registration services amfService
+ allowed-plmns 100 010
+ exit
+ allowed-nssais 1
+  sd 1
+ exit
+exit
+service-registration services smfService
+ allowed-plmns 100 010
+ exit
+ allowed-nssais 1
+  sd 1
+ exit
+exit
+service-registration profile instance-id pcf-1
+service-registration profile plmn-list 100 010
+exit
+service-registration profile snssais 1
+ sd 1
+exit
+service-registration profile snssais 2
+ sd 3
+exit
+nf-services registration service-repository LOCAL
+nf-services registration heartbeat failure-threshold 3
+nf-services registration heartbeat interval-in-secs 30
+nf-services repository CHF-LOCAL-CONFIG
+ services nchf-spendinglimitcontrol
+  api-version-in-uri v1
+  base-urls primary http://192.168.205.37:8088/
+ exit
+exit
+nf-services repository GLOBAL
+ services nnrf-disc
+  api-version-in-uri v1
+  base-urls primary http://192.168.205.37:8086/
+ exit
+ services nnrf-nfm
+  api-version-in-uri v1
+  base-urls primary http://192.168.205.37:8087/
+ exit
+exit
+nf-services repository LOCAL
+ services nnrf-nfm
+  api-version-in-uri v1
+  base-urls primary http://192.168.205.37:8083/
+  base-urls secondary http://192.168.205.37:8084/
+  base-urls tertiary http://192.168.205.37:8085/
+ exit
+exit
+nf-services discovery nchf-spendinglimitcontrol
+ service-repository                GLOBAL
+ cache-forever                     false
+ disable-subscription              false
+ subscription-extension-in-minutes 3
+exit
+system mode running
+helm default-repository pcf
+helm repository pcf
+ url http://engci-maven-master.cisco.com/artifactory/smi-fuse-internal-group/mobile-cnat-policy/policy-products/master/
+exit
+k8s namespace     pcf
+k8s registry      dockerhub.cisco.com/smi-fuse-docker-internal
+k8s single-node   false
+k8s use-volume-claims false
+k8s ingress-host-name 10.81.71.170.nip.io
+aaa authentication users user admin
+ uid        1117
+ gid        1117
+ password   $1$.1moMHGz$NWtVDG3qCJc8XCZf3pU2M.
+ ssh_keydir /tmp/admin/.ssh
+ homedir    /tmp/admin
+exit
+aaa ios level 0
+prompt "\h> "
+exit
+aaa ios level 15
+ prompt "\h# "
+exit
+aaa ios privilege exec
+ level 0
+  command action
+  exit
+  command autowizard
+  exit
+  command enable
+  exit
+  command exit
+  exit
+  command help
+  exit
+  command startup
+  exit
+ exit
+ level 15
+  command configure
+  exit
+ exit
+exit
+nacm write-default deny
+nacm groups group admin
+ user-name [ admin ]
+exit
+nacm groups group policy-admin
+ user-name [ admin ]
+exit
+nacm rule-list admin
+ group [ admin ]
+ rule any-access
+  action permit
+ exit
+exit
+nacm rule-list confd-api-manager
+ group [ confd-api-manager ]
+ rule any-access
+  action permit
+ exit
+exit
+(END)

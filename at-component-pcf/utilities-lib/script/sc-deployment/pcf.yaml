@@ -1,0 +1,13 @@
+ops-center:
+  autoDeploy: true
+  product:
+    helm:
+      api:
+# Change this to the correct release of your cnee ops-center and namespace of the cnee ops-center
+        release: cnee-ops-center
+        namespace: cnee
+      repository:
+        url: http://engci-maven-master.cisco.com/artifactory/mobile-cnat-charts-release/builds/2019.04-4/pcf.2019.04.01-4/
+        name: pcf
+
+

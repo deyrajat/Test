@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message-bundle>
+
+	<restMessage id="Create_Session" appInterface="REST"
+		type="JSON">
+        {
+          "supi": "imsi-123456789012388",
+          "gpsi": "msisdn-1234567938",
+          "pduSessionId": 12345,
+          "dnn": "data",
+          "notificationUri": "http://localhost:9980/simulator/nsmf_updateNotify",
+          "accessType": "3GPP_ACCESS",
+          "ratType": "NR",
+          "servingNetwork": {
+            "mcc": "703",
+            "mnc": "691"
+          }
+        }
+	</restMessage>
+	
+	<restMessage id="Update_Session" appInterface="REST"
+		type="JSON">
+        {
+          "accessType": "3GPP_ACCESS",
+          "ratType": "NR"
+        }
+	</restMessage>	
+	
+</message-bundle>

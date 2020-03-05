@@ -1,0 +1,5 @@
+BALANCE01=sessionmgr01:sessionmgr02,27718
+SESSION01=sessionmgr01:sessionmgr02,27717
+SESSION02=sessionmgr01:sessionmgr02,27737
+SPR01=sessionmgr01:sessionmgr02,27720
+#Power off/on LB01, LB02 VM (Interval 30 mins)

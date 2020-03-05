@@ -1,0 +1,71 @@
+product cee# show running-config
+bulk-stats enable true
+system mode running
+helm default-repository smi
+helm repository smi
+ url http://engci-maven-master.cisco.com/artifactory/smi-fuse-internal-snapshot/smi-apps/smi-cee-products/master/
+exit
+k8s namespace     cee
+k8s registry      dockerhub.cisco.com/smi-fuse-docker-internal
+k8s single-node   false
+k8s use-volume-claims false
+k8s ingress-host-name 10.81.71.170.nip.io
+aaa authentication users user admin
+ uid        117
+ gid        1117
+ password   $1$O9r3pUaZ$0ssjB9aZIHgRIShhiQsxE1
+ ssh_keydir /tmp/admin/.ssh
+ homedir    /tmp/admin
+exit
+aaa ios level 0
+ prompt "\h> "
+exit
+aaa ios level 15
+ prompt "\h# "
+exit
+aaa ios privilege exec
+ level 0
+  command action
+  exit
+  command autowizard
+  exit
+  command enable
+  exit
+  command exit
+  exit
+  command help
+  exit
+  command startup
+  exit
+ exit
+ level 15
+  command configure
+  exit
+ exit
+exit
+nacm write-default deny
+nacm groups group admin
+ user-name [ admin ]
+exit
+nacm groups group grafana-admin
+ user-name [ admin ]
+exit
+nacm groups group grafana-editor
+ user-name [ admin ]
+exit
+nacm groups group policy-admin
+ user-name [ admin ]
+exit
+nacm rule-list admin
+ group [ admin ]
+ rule any-access
+  action permit
+ exit
+exit
+nacm rule-list confd-api-manager
+ group [ confd-api-manager ]
+ rule any-access
+  action permit
+ exit
+exit
+product cee#

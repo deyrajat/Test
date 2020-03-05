@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message-bundle>
+	
+	<restMessage id="SESSION_REPLICAS_SET1" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"global-settings": {
+					"db-replica": 1
+				}
+			}
+		}
+	</restMessage>	
+	
+	<restMessage id="SESSION_SHARDS_SET1" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"shard-count": 1
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_DATASTORES_SET1" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"session-db-ep-replicas": 1
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_REPLICAS_RESET_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"global-settings": {
+					"db-replica": SESSION_REPLICAS_CNT
+				}
+			}
+		}
+	</restMessage>	
+	
+	<restMessage id="SESSION_SHARDS_RESET_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"shard-count": SESSION_SHARDS_CNT
+				}
+			}
+		}
+	</restMessage>
+	
+	<restMessage id="SESSION_DATASTORES_RESET_JSON" appInterface="REST"
+		type="JSON">
+		{
+			"db": {
+				"session": {
+					"session-db-ep-replicas": DATASTORE_REPLICAS
+				}
+			}
+		}
+	</restMessage>
+	
+</message-bundle>

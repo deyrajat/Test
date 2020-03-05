@@ -1,0 +1,10 @@
+global:
+  registry: dockerhub.cisco.com/mobile-cnat-dev-docker
+  singleNode: false
+  useVolumeClaims: false
+  imagePullPolicy: IfNotPresent
+  imagePullSecrets:
+    - name: "regcred"
+  ingressHostname: 10.86.66.217.nip.io
+  loggingLevels:
+    default: debug

@@ -1,0 +1,5 @@
+sar,60,SITE1,oam,protocol,service,session-mgr
+top,600,SITE1,oam,protocol,service,session-mgr
+iostat,60,SITE1,oam,protocol,service,session-mgr
+vmstat,60,SITE1,oam,protocol,service,session-mgr
+mpstat,60,SITE1,oam,protocol,service,session-mgr

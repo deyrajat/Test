@@ -1,0 +1,11 @@
+ops-center:
+  product:
+    autoDeploy: true
+    helm:
+      repository:
+        url: http://engci-maven-master.cisco.com/artifactory/mobile-cnat-charts-dev/mobile-cnat-infrastructure/cnee-products/18.3/
+        name: cnee
+helm-api:
+  env:
+    - name: DOWNLOAD_CHART_PROXY
+      value: "http://proxy-wsa.esl.cisco.com:80/"
